@@ -7,6 +7,12 @@ module.exports = {
     useNullAsDefault: true,
     connection: {
       filename: './data/projects.db3',
+      // typeCast: function(completed, next) {
+      //   if (completed.type == 'TINY' && completed.length == 1) {
+      //     return (completed.string() == '1');
+      //   }
+      //   return next();
+      // }
     },
     migrations: {
       directory: './data/migrations',
