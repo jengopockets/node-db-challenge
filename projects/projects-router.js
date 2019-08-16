@@ -33,8 +33,24 @@ router.get('/:project_id/resources', (req,res) => {
         res.status(500).json({message:'Error gettin resources'})
     })   
 })
-router.post('/:id/resources', (req,res) => {
-    
+router.get('/resources', (req,res) => {
+    data.getAllResources()
+    .then(resources => {
+        res.status(200).json(resources);
+    }) 
+    .catch(err => {
+        res.status(500).json({message:'Error gettin resources'})
+    })   
+})
+router.post('/resources', (req,res) => {
+    const resourceData = req.body;
+    data.addResource(resourceData)
+    .then(resources => {
+        res.status(200).json(resources)
+    })
+    .catch(err => {
+        res.status(500).json({message:'Error adding resources'})
+    })    
 })
 router.get('/:project_id/tasks', (req,res) => {
     const { project_id } = req.params
@@ -46,7 +62,15 @@ router.get('/:project_id/tasks', (req,res) => {
         res.status(500).json({message:'Error gettin tasks'})
     })
 })
-router.post('/:id/tasks', (req,res) => {
+router.post('/tasks', (req,res) => {
+    const taskData = req.body;
+    data.addTask(taskData)
+    .then(tasks => {
+        res.status(200).json(tasks)
+    })
+    .catch(err => {
+        res.status(500).json({message:'Error adding tasks'})
+    })  
     
 })
 
