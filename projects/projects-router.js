@@ -13,9 +13,17 @@ router.get('/', (req,res) => {
 })
 
 router.post('/', (req,res) => {
+    const projectData = req.body;
+    data.addProject(projectData)
+    .then(projects => {
+        res.status(200).json(projects)
+    })
+    .catch(err => {
+        res.status(500).json({message:'Error adding projects'})
+    })
     
 })
-router.get('/:project_id/resources', async (req,res) => {
+router.get('/:project_id/resources', (req,res) => {
     const { project_id } = req.params
     data.getResources(project_id)
     .then(resources => {

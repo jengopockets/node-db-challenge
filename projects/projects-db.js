@@ -2,7 +2,8 @@ const db = require('../data/db-config.js');
 module.exports = {
     getProjects,
     getResources,
-    getTasks
+    getTasks,
+    addProject
 };
 
 function getProjects() {
@@ -20,4 +21,7 @@ function getTasks(project_id) {
     .innerJoin('projects as p', 't.project_id', '=', 'p.id')
     .select('p.name', 't.description', 't.notes', 't.completed')
     .where({project_id})
+}
+function addProject(project) {
+    return db('projects').insert(project);
 }
